@@ -2,14 +2,14 @@
     <section className="temperature-now">
         <div className="location">
             <img src="/assets/pin.svg" alt="" />
-            <strong>Brasília - DF</strong>
+            <strong>{{ name }} - {{ country }}</strong>
         </div>
         <div className="temp">
             <div className="number">
-                18
+                {{  temp?.toFixed() }}
                 <div className="maxmin">
-                    20°{{ " " }}
-                    <span>16°</span>
+                    {{ temp_max?.toFixed() }}°{{ " " }}
+                    <span>{{ temp_min?.toFixed() }}°</span>
                 </div>
             </div>
             <div className="celsius">°C</div>
@@ -20,7 +20,7 @@
                 <div className="info">
                     <p>Vento</p>
                     <h5>
-                        3 <span>km/h</span>
+                        {{ speed?.toFixed() }} <span>km/h</span>
                     </h5>
                 </div>
             </div>
@@ -29,7 +29,7 @@
                 <div className="info">
                     <p>Umidade</p>
                     <h5>
-                        50 <span>%</span>
+                        {{ humidity?.toFixed() }} <span>%</span>
                     </h5>
                 </div>
             </div>
@@ -38,7 +38,7 @@
                 <div className="info">
                     <p>Chuva</p>
                     <h5>
-                        89 <span>%</span>
+                        {{ clouds?.toFixed() }} <span>%</span>
                     </h5>
                 </div>
             </div>
@@ -46,7 +46,22 @@
     </section>
 </template>
 
-<style>
+<script lang="ts">
+export default {
+    props: {
+        name: String,
+        country: String,
+        temp: Number,
+        temp_max: Number,
+        temp_min: Number,
+        speed: Number,
+        humidity: Number,
+        clouds: Number,
+    }
+}
+</script>
+
+<style scoped>
 .temperature-now {
     background: url("/assets/bg-temperature-now.jpg") no-repeat center;
     background-size: cover;
@@ -60,6 +75,7 @@
     width: 17.6rem;
     height: 17.6rem;
     background: url("/assets/clouds.svg") no-repeat;
+    background-size: cover;
     position: absolute;
     top: -5.6rem;
     left: -5.6rem;
@@ -71,6 +87,11 @@
     display: flex;
     align-items: center;
     gap: 0.4rem;
+}
+
+.location img {
+    width: 2.0rem;
+    height: 2.0rem;
 }
 
 .location strong {
@@ -125,6 +146,11 @@
     display: flex;
     align-items: center;
     gap: 1.2rem;
+}
+
+.stats img {
+    width: 3.2rem;
+    height: 3.2rem;
 }
 
 .stats .info {

@@ -38,7 +38,7 @@
           </section>
 </template>
 
-<style>
+<style scoped>
   .week-weather {
     padding: 4rem;
     display: flex;
@@ -50,6 +50,11 @@
     display: grid;
     justify-items: center;
     gap: 1.6rem;
+}
+
+.day > img {
+  width: 3.2rem;
+  height: 3.2rem;
 }
 
 h4.title {

@@ -4,52 +4,97 @@
       <img src="/assets/leaf.svg" alt="icone de folha" />
       Qualidade do ar
     </h2>
-    <p className="good">Boa</p>
-    <p className="number">21</p>
+    <p className="good">{{ airQualityText }}</p>
+    <p className="number"> {{ info_poluition.main.aqi }} </p>
     <div className="info">
       <div className="number">
-        <p>12.9</p>
+        <p>{{ info_poluition.components.pm2_5 }}</p>
         <small>PM2.5</small>
       </div>
       <div className="number">
-        <p>12.9</p>
+        <p>{{ info_poluition.components.pm10 }}</p>
         <small>PM10</small>
       </div>
       <div className="number">
-        <p>2.1</p>
+        <p>{{ info_poluition.components.so2 }}</p>
         <small>SO₂</small>
       </div>
       <div className="number">
-        <p>1.4</p>
+        <p>{{ info_poluition.components.no2 }}</p>
         <small>NO₂</small>
       </div>
       <div className="number">
-        <p>21.2</p>
+        <p>{{ info_poluition.components.o3 }}</p>
         <small>O₃</small>
       </div>
       <div className="number">
-        <p>0.7</p>
+        <p>{{ info_poluition.components.co }}</p>
         <small>CO</small>
       </div>
     </div>
   </section>
 </template>
 
-<style>
+<script lang="ts">
+
+export default {
+  data() {
+    return {
+      info_poluition: {
+        main: {
+          aqi: 0
+        },
+        components: {
+          co: 0,
+          no: 0,
+          no2: 0,
+          o3: 0,
+          so2: 0,
+          pm2_5: 0,
+          pm10: 0,
+          nh3: 0
+        },
+      },
+      airQualityW: {
+        main: this.$props.main,
+        components: this.$props.components
+      },
+    }
+  },
+  watch: {
+    airQualityW: {
+      handler() {
+        console.log(this.airQualityW)
+      },
+      deep: true
+    }
+  },
+  props: ["main", "components"],
+  computed: {
+    airQualityText() {
+      switch (this.info_poluition.main.aqi) {
+        case 1:
+          return 'Boa'
+        default:
+          return 'Ruim'
+      }
+    }
+  },
+  methods: {
+    in( ) {}
+  },
+  unmounted() {
+    this.in()
+  }
+}
+
+</script>
+
+<style scoped >
 .air-quality {
   font-family: 700;
   text-align: center;
   display: grid;
-}
-
-h2.title {
-  font-size: 1.6rem;
-  color: #dad8f7;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 0.8rem;
-  margin-top: 3.2rem;
 }
 
 .air-quality .good {
@@ -69,6 +114,7 @@ h2.title {
   align-items: center;
   margin-top: 3.2rem;
   padding: 0 1.6rem 1.6rem;
+  margin-bottom: 2rem;
 }
 
 .air-quality .info .number {
@@ -77,7 +123,7 @@ h2.title {
 
 .air-quality .info p {
   color: #86ebcd;
-  font-size: 1.4rem;
+  font-size: 1.2rem;
 }
 
 .air-quality .info small {
