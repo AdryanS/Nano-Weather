@@ -16,8 +16,9 @@ body {
 }
 
 main {
-  background: url("/assets/bg.jpg") no-repeat center;
-  background-size: cover;
+  background: url("/assets/bg.jpg") no-repeat;
+  background-position: bottom;
+  background-size: auto;
   min-height: 100vh;
   display: grid;
   place-content: center;
@@ -31,6 +32,100 @@ section {
   border-radius: 1rem;
 }
 
+.nav-location {
+  display: flex;
+  position: fixed;
+  align-items: center;
+  justify-content: center;
+  z-index: 5;
+  width: 100%;
+  min-height: 100vh;
+  background-color: rgba(0, 0, 0, 0.552)
+}
+
+.set-location {
+  width: 40.875rem;
+  height: 53rem;
+  background-color: #6d67d0;
+  border-radius: 0.6rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.set-location input {
+  width: 24rem;
+  height: 3.6rem;
+  margin-top: 1.6rem;
+  border-style: none;
+  border-radius: 0.6rem;
+  padding: 0.8rem;
+}
+.set-location input:focus {
+  outline: #6d67d0 1px auto;
+}
+
+.set-location .city {
+  width: 24rem;
+  height: 6.2rem;
+  margin-top: 1.6rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #6d67d0;
+  box-shadow: #0000004a 0px 2px 5px;
+  color: #C2BFF4;
+  font-weight: 700;
+  font-size: 1.4rem;
+  border-style: none;
+  border-radius: 0.2rem;
+  transition: all 0.3s ease-in-out;
+}
+
+.set-location .city:hover {
+  background-color: #9e9aec;
+}
+
+footer {
+  position: fixed;
+  z-index: 999;
+}
+
+footer .set-location-menu {
+  position: fixed;
+  bottom: 3.2rem;
+  right: 3.2rem;
+  width: 6.4rem;
+  height: 6.4rem;
+  border-radius: 50%;
+  background: #6d67d0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+footer .set-location-menu img {
+  width: 3.4rem;
+  height: 3.4rem;
+}
+
+.title img {
+  width: 2.4rem;
+  height: 2.4rem;
+}
+
+h2.title {
+  font-size: 1.6rem;
+  color: #dad8f7;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.8rem;
+  margin-top: 3.2rem;
+}
+
+
+
 @media (min-width: 1200px) {
   main {
       grid-template-columns: 48rem 27.7rem 27.7rem;
@@ -43,5 +138,39 @@ section {
 
   .week-weather {
       grid-column: 2/4 ;
+  }
+}
+
+@media (max-width: 580px) {
+  :root {
+    font-size:  55.5%;
+  }
+  .week-weather {
+    flex-direction: column;
+  }
+
+  .week-weather .day .title {
+    font-size: 2rem;
+  }
+  .week-weather .day img {
+    width: 6rem;
+    height: 6rem;
+  }
+  .week-weather .day .maxmin {
+    font-size: 1.8rem;
+    margin-bottom: 2rem;
+  }
+  
+  .temperature-now::before {
+    width: 12rem;
+    height: 12rem;
+    top: -5rem;
+    left: -2rem;
+  }
+}
+
+@media (max-width: 386px) {
+  :root {
+    font-size:  40.5%;
   }
 }

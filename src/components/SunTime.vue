@@ -9,17 +9,82 @@
         <div className="chart">
           <img src="/assets/sun-chart.svg" alt="imagem de um grafico semi circulo com traços" />
         </div>
-        <time className="now">17:30</time>
+        <div className="now">{{ setTime }}</div>
       </div>
     </div>
     <div className="time">
-      <time className="sunrise">06:10</time>
-      <time className="sunset">18:30</time>
+      <div className="sunrise">{{ setSunrise }}</div>
+      <div className="sunset">{{ setSunset }}</div>
     </div>
   </section>
 </template>
 
-<style>
+<script lang="ts">
+export default {
+  data() {
+    return {
+      timeNow: "--:--:--",
+      sunrise: this.$props.sunriseProps,
+      sunset: this.$props.sunsetProps,
+      timezone: this.$props.timezoneHours,
+      sunriseF: "--:--:--",
+      sunsetF: "--:--:--",
+    }
+  },
+  methods: {
+    setHourNow() {
+      let time = new Date();
+      let ofsetInMinutes = this.timezone / 3600
+      let timeF = time.setHours(time.getHours() + ofsetInMinutes);
+
+      this.timeNow = new Date(timeF).toLocaleTimeString('br', {
+        hour: "2-digit",
+        minute: '2-digit',
+        second: '2-digit',
+      })
+    },
+    formatSunrise(data: any) {
+      this.sunriseF = data.toLocaleTimeString('br', { hour: "2-digit", minute: "2-digit" })
+    },
+    formatSunset(data: any) {
+      this.sunsetF = data.toLocaleTimeString('br', { hour: "2-digit", minute: "2-digit" })
+    },
+  },
+  mounted() {
+    setInterval(this.setHourNow, 1000)
+  },
+  watch: {
+    sunriseProps(newVal,) {
+      if (newVal) {
+        const data = new Date(newVal * 1000)
+
+        this.formatSunrise(data);
+      };
+    },
+    sunsetProps(newVal,) {
+      if (newVal) {
+        const data = new Date(newVal * 1000)
+
+        this.formatSunset(data);
+      };
+    },
+  },
+  props: ['sunriseProps', 'sunsetProps', 'timezoneHours'],
+  computed: {
+    setTime() {
+      return `${this.timeNow}`
+    },
+    setSunrise() {
+      return `${this.sunriseF}`
+    },
+    setSunset() {
+      return `${this.sunsetF}`
+    },
+  }
+}
+</script>
+
+<style scoped>
 .sun-chart-wrapper {
   position: relative;
   margin-top: 4rem;
@@ -27,7 +92,7 @@
 }
 
 .sun-chart {
-  --pos-x: 80;
+  --pos-x: 60 ;
   margin: auto;
   width: 21.6rem;
   height: 21.6rem;
@@ -72,9 +137,11 @@
   position: absolute;
   top: 0;
   left: -1%;
+  width: 21.6rem;
+  height: 11.2rem;
 }
 
-time.now {
+div.now {
   position: absolute;
   top: 25%;
   left: 50%;
@@ -94,5 +161,6 @@ time.now {
   margin: 1rem auto 0;
   padding: 0 1.6rem 1.6rem;
   max-width: 27.6rem;
+  margin-bottom: 2rem;
 }
 </style>
