@@ -70,7 +70,7 @@ export default {
       await weather.get(`air_pollution?lat=${this.latlon.lat}&lon=${this.latlon.lon}&appid=${import.meta.env.VITE_API_KEY}&units=metric`)
         .then(res =>  this.$store.commit('setPoluition', res.data))
 
-      await weather.get(`forecast?lat=${this.latlon.lat}&lon=${this.latlon.lon}&appid=${import.meta.env.VITE_API_KEY}&units=metric`)
+      await weather.get(`forecast?lat=${this.latlon.lat}&lon=${this.latlon.lon}&appid=${import.meta.env.VITE_API_KEY}&units=metric&lang=pt_br`)
         .then(res =>  this.$store.commit('setForecast', res.data))
 
         console.log(this.$store.state)

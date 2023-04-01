@@ -2,7 +2,7 @@
   <section className="sun-time">
     <h2 className="title">
       <img src="/assets/sun-time.svg" alt="icone de um sol dentro" />
-      Horário do sol
+      Horario local
     </h2>
     <div className="sun-chart-wrapper">
       <div className="sun-chart">
@@ -29,15 +29,15 @@ export default {
       timezone: this.$props.timezoneHours,
       sunriseF: "--:--:--",
       sunsetF: "--:--:--",
+      watchThis: this.$store.state.weather_info.name,
+      timeout: setInterval(this.setHourNow, 1000),
     }
   },
   methods: {
     setHourNow() {
       let time = new Date();
-      let ofsetInMinutes = this.timezone / 3600
-      let timeF = time.setHours(time.getHours() + ofsetInMinutes);
 
-      this.timeNow = new Date(timeF).toLocaleTimeString('br', {
+      this.timeNow = new Date(time).toLocaleTimeString('br', {
         hour: "2-digit",
         minute: '2-digit',
         second: '2-digit',
@@ -51,20 +51,20 @@ export default {
     },
   },
   mounted() {
-    setInterval(this.setHourNow, 1000)
+    this.timeout
   },
   watch: {
     sunriseProps(newVal,) {
       if (newVal) {
         const data = new Date(newVal * 1000)
-
+        
         this.formatSunrise(data);
       };
     },
     sunsetProps(newVal,) {
       if (newVal) {
         const data = new Date(newVal * 1000)
-
+        
         this.formatSunset(data);
       };
     },

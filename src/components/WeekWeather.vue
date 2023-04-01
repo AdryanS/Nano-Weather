@@ -1,42 +1,33 @@
+<!-- eslint-disable vue/no-use-computed-property-like-method -->
+<!-- eslint-disable no-constant-condition -->
+<!-- eslint-disable vue/return-in-computed-property -->
 <template>
   <section className="week-weather">
-    <div className="day">
-      <h4 className="title">Amanhã</h4>
-      <img src="/assets/weather-clouds.svg" alt="" />
+    <div className="day" v-for="weak, index in $store.state.weather_forecast.list.slice(0, 4)" :key="index">
+      <h4 className="title">
+        {{ 
+        semana[d.getDay() + index]
+      }}
+        </h4>
+      <img :src="`https://openweathermap.org/img/wn/${weak.weather[0].icon}@2x.png`" alt="" />
       <p className="maxmin">
-        21° <span>16°</span>
-      </p>
-    </div>
-    <div className="day">
-      <h4 className="title">Sexta</h4>
-      <img src="/assets/weather-sun.svg" alt="" />
-      <p className="maxmin">
-        28° <span>20°</span>
-      </p>
-    </div>
-    <div className="day">
-      <h4 className="title">Sabado</h4>
-      <img src="/assets/weather-rain.svg" alt="" />
-      <p className="maxmin">
-        28° <span>20°</span>
-      </p>
-    </div>
-    <div className="day">
-      <h4 className="title">Domingo</h4>
-      <img src="/assets/weather-thunder.svg" alt="" />
-      <p className="maxmin">
-        28° <span>20°</span>
-      </p>
-    </div>
-    <div className="day">
-      <h4 className="title">Segunda</h4>
-      <img src="/assets/weather-cloudy.svg" alt="" />
-      <p className="maxmin">
-        28° <span>20°</span>
+        {{ weak.main.temp_max.toFixed() }}° <span>{{ weak.main.temp_min.toFixed()}}°</span>
       </p>
     </div>
   </section>
 </template>
+
+<script lang="ts">
+export default {
+  data() {
+    return {
+      semana: ["Domingo", "Segunda-Feira", "Terça-Feira", "Quarta-Feira", "Quinta-Feira", "Sexta-Feira", "Sábado", "Domingo", "Segunda-Feira", "Terça-Feira", "Quarta-Feira", "Quinta-Feira", "Sexta-Feira", "Sábado"],
+      d: new Date(),
+    }
+  },
+}
+
+</script>
 
 <style scoped>
 .week-weather {

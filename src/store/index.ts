@@ -56,7 +56,7 @@ export default createStore({
     },
     weather_position: [
       {
-        name: 'Brasília',
+        name: 'escolha',
         local_names: {
           en: '',
           ru: '',
@@ -64,8 +64,8 @@ export default createStore({
         },
         lat: 0,
         lon: 0,
-        country: 'DF',
-        state: 'Brasil',
+        country: 'um',
+        state: 'local',
         timezone: '',
         population: 0,
         id: 0
