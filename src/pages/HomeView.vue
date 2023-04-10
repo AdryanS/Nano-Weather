@@ -1,4 +1,8 @@
 <template>
+    <head>
+      <link rel="icon" :href="`https://openweathermap.org/img/wn/${$store.state.weather_forecast.list[0].weather[0].icon}@2x.png`">
+      <title>Nano-Weather</title>
+    </head>
   <div v-if="haveLocation">
     <nav className="nav-location">
       <div className="set-location">
