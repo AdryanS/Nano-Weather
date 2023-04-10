@@ -2,7 +2,7 @@
   <section className="sun-time">
     <h2 className="title">
       <img src="/assets/sun-time.svg" alt="icone de um sol dentro" />
-      Horario local
+      Horario local.
     </h2>
     <div className="sun-chart-wrapper">
       <div className="sun-chart">
